@@ -492,8 +492,9 @@ async function submitDiary() {
 const webhook = localStorage.getItem('make_webhook');
 if (webhook) {
   await fetch('/.netlify/functions/webhook', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+method: 'POST',
+mode: 'no-cors',
+headers: { 'Content-Type': 'text/plain' }
         body: JSON.stringify(entry)
       });
       showToast('✅ Notion 저장 완료!');
