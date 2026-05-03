@@ -1,0 +1,14 @@
+{
+  "name": "오늘의 일기",
+  "short_name": "일기",
+  "description": "매일 기록하는 나의 하루",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#faf9f6",
+  "theme_color": "#f4a7b9",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
