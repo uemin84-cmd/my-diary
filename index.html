@@ -66,6 +66,17 @@ textarea { min-height: 90px; }
 .submit-btn { width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent2)); border: none; border-radius: 16px; color: #fff; font-size: 15px; font-weight: 700; padding: 17px; cursor: pointer; margin-top: 8px; font-family: inherit; box-shadow: 0 4px 16px rgba(232,131,154,0.3); }
 .submit-btn:active { opacity: 0.88; }
 .export-btn { width: 100%; background: var(--card); border: 1.5px solid var(--border); border-radius: 14px; color: var(--text); font-size: 14px; font-weight: 600; padding: 14px; cursor: pointer; font-family: inherit; box-shadow: var(--shadow); }
+.quick-row { display: flex; gap: 8px; }
+.quick-row input { flex: 1; }
+.quick-row button { background: var(--accent); border: none; border-radius: 12px; color: #fff; font-weight: 700; font-size: 14px; padding: 0 16px; cursor: pointer; font-family: inherit; }
+.spend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 8px 2px; border-bottom: 1px solid var(--bg2); }
+.spend-item .cat { font-weight: 600; }
+.spend-item .memo { flex: 1; color: var(--sub); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.spend-item .amt { font-weight: 700; color: #e06c7f; }
+.spend-item .amt.income { color: #4a8fd6; }
+.spend-item .del { background: none; border: none; color: var(--sub2); cursor: pointer; font-size: 13px; }
+.spend-total { display: flex; justify-content: space-between; font-size: 12px; color: var(--sub); margin-top: 8px; font-weight: 600; }
+.spend-total a { color: var(--accent); text-decoration: none; }
 .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(60px); background: var(--text); border-radius: 24px; padding: 12px 22px; font-size: 13px; font-weight: 600; color: #fff; opacity: 0; transition: all 0.35s; z-index: 999; white-space: nowrap; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
@@ -141,8 +152,13 @@ textarea { min-height: 90px; }
       <input type="text" id="song" placeholder="아티스트 - 곡명 또는 Apple Music 링크">
     </div>
     <div class="card">
-      <div class="card-label"><div class="dot" style="background:#b8d4e8;"></div>재테크 · Finance</div>
-      <textarea id="finance" placeholder="오늘의 소비 / 투자 기록 / 경제 인사이트" style="min-height:70px;"></textarea>
+      <div class="card-label"><div class="dot" style="background:#b8d4e8;"></div>오늘의 소비 · Spending</div>
+      <div class="quick-row">
+        <input type="text" id="quick-spend" placeholder="점심 김밥 12500" autocomplete="off"
+               onkeydown="if(event.key==='Enter' && !event.isComposing) addSpend()">
+        <button onclick="addSpend()">추가</button>
+      </div>
+      <div id="today-spend"></div>
     </div>
     <div class="card">
       <div class="card-label"><div class="dot" style="background:#e8c8a0;"></div>오늘의 사진</div>
@@ -182,6 +198,7 @@ textarea { min-height: 90px; }
 
 <div class="toast" id="toast"></div>
 
+<script src="/budget-core.js"></script>
 <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').catch(() => {});
@@ -190,7 +207,7 @@ if ('serviceWorker' in navigator) {
 const now = new Date();
 const days = ['일','월','화','수','목','금','토'];
 const weekNum = Math.ceil(now.getDate() / 7);
-const dateStr = now.toISOString().split('T')[0];
+const dateStr = Budget.localDate(now);
 const dayStr = days[now.getDay()] + '요일';
 const weekTag = `${now.getMonth()+1}월 ${weekNum}주차`;
 
@@ -268,7 +285,7 @@ async function submitDiary() {
     health: document.getElementById('health').value.trim(),
     book: document.getElementById('book').value.trim(),
     song: document.getElementById('song').value.trim(),
-    finance: document.getElementById('finance').value.trim()
+    finance: Budget.daySummary(dateStr)
   };
 
   const saved = JSON.parse(localStorage.getItem('diary_entries') || '[]');
@@ -295,11 +312,46 @@ async function submitDiary() {
 }
 
 function clearForm() {
-  ['gratitude','worry','health','book','song','finance'].forEach(id => { document.getElementById(id).value = ''; });
+  ['gratitude','worry','health','book','song'].forEach(id => { document.getElementById(id).value = ''; });
   document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
   selectedMood = '';
   document.getElementById('photo-preview').style.display = 'none';
 }
+
+// ---------- 오늘의 소비 (가계부와 같은 데이터) ----------
+async function addSpend() {
+  const input = document.getElementById('quick-spend');
+  const p = Budget.parse(input.value);
+  if (!p) return;
+  if (!p.amount) { showToast('금액도 함께 적어 주세요 (예: 커피 4500)'); return; }
+  input.value = '';
+  await Budget.add(p);
+  showToast(`💰 ${p.category} ${Budget.won(p.amount)} 기록!`);
+}
+
+async function removeSpend(id) {
+  if (confirm('이 기록을 삭제할까요?')) await Budget.remove(id);
+}
+
+function renderSpend() {
+  const list = Budget.byDate(dateStr);
+  const s = Budget.budgetStatus();
+  const esc = Budget.esc;
+  const footer = s.budget
+    ? `<span>${s.todayLeft >= 0 ? `오늘 ${Budget.won(s.todayLeft)} 더 쓸 수 있어요` : `오늘 예산 ${Budget.won(-s.todayLeft)} 초과`}</span>`
+    : `<span>${list.length ? `오늘 지출 ${Budget.won(s.spentToday)}` : '예) 커피 4500 · 택시 1만2천'}</span>`;
+  document.getElementById('today-spend').innerHTML =
+    list.map(e => `
+      <div class="spend-item">
+        <span class="cat">${esc(e.category)}</span>
+        <span class="memo">${esc(e.memo)}</span>
+        <span class="amt${e.type === '수입' ? ' income' : ''}">${e.type === '수입' ? '+' : '-'}${Budget.won(e.amount)}</span>
+        <button class="del" onclick="removeSpend('${esc(e.id)}')">✕</button>
+      </div>`).join('') +
+    `<div class="spend-total">${footer}<a href="/budget.html">가계부 ›</a></div>`;
+}
+Budget.onChange(renderSpend);
+renderSpend();
 
 function renderHistory() {
   const saved = JSON.parse(localStorage.getItem('diary_entries') || '[]').slice().reverse();

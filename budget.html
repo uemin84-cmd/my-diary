@@ -28,27 +28,41 @@ header h1 span { color: var(--accent); }
 .card { background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); }
 .card-label { font-size: 11px; font-weight: 700; color: var(--sub); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
 .card-label .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
-input[type="text"], input[type="date"], input[type="url"], input[type="password"] { width: 100%; background: var(--bg2); border: 1.5px solid var(--border); border-radius: 12px; color: var(--text); font-family: inherit; font-size: 15px; padding: 12px 14px; outline: none; transition: border-color 0.15s, background 0.15s; -webkit-appearance: none; }
+input[type="text"], input[type="url"], input[type="password"] { width: 100%; background: var(--bg2); border: 1.5px solid var(--border); border-radius: 12px; color: var(--text); font-family: inherit; font-size: 15px; padding: 12px 14px; outline: none; transition: border-color 0.15s, background 0.15s; -webkit-appearance: none; }
 input:focus { border-color: var(--accent2); background: #fff; }
 input::placeholder { color: var(--sub2); }
-.type-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.type-btn { background: var(--bg2); border: 1.5px solid var(--border); border-radius: 14px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer; color: var(--sub); font-family: inherit; -webkit-appearance: none; }
-.type-btn.selected[data-type="지출"] { border-color: var(--expense); color: var(--expense); background: #fdf0f2; }
-.type-btn.selected[data-type="수입"] { border-color: var(--income); color: var(--income); background: #eff5fc; }
-.amount-wrap { position: relative; }
-.amount-wrap input { font-size: 24px; font-weight: 700; padding-right: 44px; text-align: right; }
-.amount-wrap .won { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--sub); font-weight: 600; }
-.chip-grid { display: flex; flex-wrap: wrap; gap: 7px; }
-.chip { background: var(--bg2); border: 1.5px solid var(--border); border-radius: 20px; padding: 8px 13px; font-size: 13px; cursor: pointer; color: var(--text); font-family: inherit; font-weight: 500; -webkit-appearance: none; }
+.hint { font-size: 11px; color: var(--sub2); margin-top: 8px; line-height: 1.7; }
+
+/* 오늘 쓸 수 있는 돈 */
+.hero { text-align: center; padding: 24px 18px 20px; background: linear-gradient(160deg, #fff 40%, #fdf0f3); }
+.hero .label { font-size: 13px; color: var(--sub); font-weight: 600; }
+.hero .big { font-size: 36px; font-weight: 700; letter-spacing: -1px; margin: 6px 0 4px; }
+.hero .big.over { color: var(--expense); }
+.hero .sub { font-size: 12px; color: var(--sub); }
+.hero .progress { height: 8px; background: var(--bg2); border-radius: 4px; overflow: hidden; margin: 16px 0 6px; }
+.hero .progress div { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 4px; transition: width 0.3s; }
+.hero .progress.over div { background: var(--expense); }
+.hero .row { display: flex; justify-content: space-between; font-size: 11px; color: var(--sub); }
+.hero button { margin-top: 10px; background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 10px 18px; font-family: inherit; font-weight: 700; font-size: 13px; cursor: pointer; }
+
+/* 한 줄 입력 */
+.quick-row { display: flex; gap: 8px; }
+.quick-row input { flex: 1; font-size: 16px; }
+.quick-row button { background: var(--accent); border: none; border-radius: 12px; color: #fff; font-weight: 700; font-size: 15px; padding: 0 18px; cursor: pointer; font-family: inherit; }
+.preview { margin-top: 12px; display: none; }
+.preview.show { display: block; }
+.preview .line { font-size: 13px; color: var(--sub); margin-bottom: 8px; }
+.preview .line b { color: var(--text); }
+.chip-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { background: var(--bg2); border: 1.5px solid var(--border); border-radius: 20px; padding: 6px 11px; font-size: 12px; cursor: pointer; color: var(--text); font-family: inherit; font-weight: 500; -webkit-appearance: none; }
 .chip.selected { border-color: var(--accent); background: #fdf0f3; color: var(--accent); font-weight: 700; }
-.submit-btn { width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent2)); border: none; border-radius: 16px; color: #fff; font-size: 15px; font-weight: 700; padding: 17px; cursor: pointer; margin-top: 8px; font-family: inherit; box-shadow: 0 4px 16px rgba(232,131,154,0.3); }
-.submit-btn:active { opacity: 0.88; }
+
 .ghost-btn { width: 100%; background: var(--card); border: 1.5px solid var(--border); border-radius: 14px; color: var(--text); font-size: 14px; font-weight: 600; padding: 13px; cursor: pointer; font-family: inherit; box-shadow: var(--shadow); }
 .settings-toggle { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--sub); cursor: pointer; margin-bottom: 12px; padding: 11px 14px; background: var(--card); border-radius: 12px; border: 1px solid var(--border); font-weight: 500; box-shadow: var(--shadow); }
 .settings-panel { display: none; flex-direction: column; gap: 10px; margin-bottom: 12px; }
 .settings-panel.open { display: flex; }
-.hint { font-size: 11px; color: var(--sub2); margin-top: 8px; line-height: 1.7; }
 .sync-status { font-size: 12px; color: var(--sub); margin-left: auto; }
+
 .month-nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 14px; }
 .month-nav button { background: var(--card); border: 1px solid var(--border); border-radius: 50%; width: 34px; height: 34px; font-size: 16px; cursor: pointer; color: var(--sub); }
 .month-nav strong { font-size: 17px; min-width: 110px; text-align: center; }
@@ -68,11 +82,14 @@ input::placeholder { color: var(--sub2); }
 .tx .del { background: none; border: none; color: var(--sub2); font-size: 16px; cursor: pointer; padding: 4px; }
 .tx .unsynced { font-size: 10px; color: var(--accent); font-weight: 700; }
 .bar-row { margin-bottom: 12px; }
-.bar-row .top { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; }
-.bar-row .top span:last-child { color: var(--sub); }
+.bar-row .top { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; gap: 8px; }
+.bar-row .top span:last-child { color: var(--sub); white-space: nowrap; }
 .bar { height: 8px; background: var(--bg2); border-radius: 4px; overflow: hidden; }
 .bar div { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 4px; }
-.empty-state { text-align: center; color: var(--sub); padding: 50px 0; font-size: 15px; line-height: 2; }
+.bar.calm div { background: linear-gradient(90deg, #8fb8de, #b8d4e8); }
+.insight { background: #fdf0f3; border-radius: 12px; padding: 12px 14px; font-size: 14px; line-height: 1.6; margin-bottom: 14px; }
+.insight b { color: var(--accent); }
+.empty-state { text-align: center; color: var(--sub); padding: 40px 0; font-size: 14px; line-height: 1.9; }
 .page { display: none; }
 .page.active { display: block; }
 .bottom-tab { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); border-top: 1px solid var(--border); display: flex; padding: 8px 0 24px; box-shadow: 0 -2px 12px rgba(0,0,0,0.06); }
@@ -85,56 +102,44 @@ input::placeholder { color: var(--sub2); }
 </head>
 <body>
 
-<div class="page active" id="page-add">
+<div class="page active" id="page-today">
   <header>
     <div class="date-chip">💰 <span id="date-display"></span></div>
     <h1>오늘의 <span>가계부</span></h1>
   </header>
   <div class="content">
+    <div class="card hero" id="hero"></div>
+
+    <div class="card">
+      <div class="quick-row">
+        <input type="text" id="quick" placeholder="점심 김밥 12500" autocomplete="off"
+               oninput="onQuickInput()" onkeydown="if(event.key==='Enter' && !event.isComposing) submitQuick()">
+        <button onclick="submitQuick()">추가</button>
+      </div>
+      <div class="preview" id="preview">
+        <div class="line" id="preview-line"></div>
+        <div class="chip-grid" id="preview-chips"></div>
+      </div>
+      <p class="hint">예) 커피 4500 · 택시 1만2천 어제 · 마트 장보기 3.5만 현금 · +월급 300만</p>
+    </div>
+
+    <div id="today-list"></div>
+
     <div class="settings-toggle" onclick="toggleSettings()">
-      ⚙️ 구글 시트 연동 설정 <span class="sync-status" id="sync-status"></span> <span style="font-size:15px;">›</span>
+      ⚙️ 예산 · 구글 시트 설정 <span class="sync-status" id="sync-status"></span> <span style="font-size:15px;">›</span>
     </div>
     <div class="settings-panel" id="settings-panel">
       <div class="card">
-        <div class="card-label"><div class="dot"></div>Apps Script 웹 앱 URL</div>
+        <div class="card-label"><div class="dot"></div>한 달 예산 (지출)</div>
+        <input type="text" id="monthly-budget" inputmode="numeric" placeholder="예: 1,000,000" oninput="saveBudget(this)">
+        <div class="card-label" style="margin-top:16px;"><div class="dot" style="background:#a8c5da;"></div>Apps Script 웹 앱 URL</div>
         <input type="url" id="gas-url" placeholder="https://script.google.com/macros/s/xxxx/exec" oninput="saveSettings()">
-        <div class="card-label" style="margin-top:14px;"><div class="dot"></div>비밀 키 (선택)</div>
+        <div class="card-label" style="margin-top:14px;"><div class="dot" style="background:#a8c5da;"></div>비밀 키 (선택)</div>
         <input type="password" id="gas-token" placeholder="Code.gs의 TOKEN과 같은 값" oninput="saveSettings()">
         <p class="hint">구글 시트 → 확장 프로그램 → Apps Script에 Code.gs를 붙여넣고<br>배포 → 새 배포 → 웹 앱(액세스: 모든 사용자) → URL 복사</p>
-        <button class="ghost-btn" style="margin-top:12px;" onclick="syncAll(true)">🔄 지금 동기화</button>
+        <button class="ghost-btn" style="margin-top:12px;" onclick="syncNow(true)">🔄 지금 동기화</button>
       </div>
     </div>
-
-    <div class="card">
-      <div class="type-toggle">
-        <button class="type-btn selected" data-type="지출" onclick="selectType(this)">지출</button>
-        <button class="type-btn" data-type="수입" onclick="selectType(this)">수입</button>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-label"><div class="dot"></div>금액</div>
-      <div class="amount-wrap">
-        <input type="text" id="amount" inputmode="numeric" placeholder="0" oninput="formatAmount(this)">
-        <span class="won">원</span>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-label"><div class="dot" style="background:#a8c5da;"></div>카테고리</div>
-      <div class="chip-grid" id="category-chips"></div>
-    </div>
-    <div class="card" id="method-card">
-      <div class="card-label"><div class="dot" style="background:#c5b8e0;"></div>결제수단</div>
-      <div class="chip-grid" id="method-chips"></div>
-    </div>
-    <div class="card">
-      <div class="card-label"><div class="dot" style="background:#a8d5b5;"></div>날짜</div>
-      <input type="date" id="tx-date">
-    </div>
-    <div class="card">
-      <div class="card-label"><div class="dot" style="background:#f4c89a;"></div>메모</div>
-      <input type="text" id="memo" placeholder="어디서 / 무엇을">
-    </div>
-    <button class="submit-btn" onclick="addEntry()">기록하기 ✨</button>
   </div>
 </div>
 
@@ -154,12 +159,13 @@ input::placeholder { color: var(--sub2); }
   </div>
 </div>
 
-<div class="page" id="page-stats">
+<div class="page" id="page-insight">
   <header>
-    <div class="date-chip">📊 통계</div>
-    <h1>카테고리별 <span>지출</span></h1>
+    <div class="date-chip">🔍 분석</div>
+    <h1>나의 <span>소비 패턴</span></h1>
   </header>
   <div class="content">
+    <div class="card" id="mood-card"></div>
     <div class="month-nav">
       <button onclick="moveMonth(-1)">‹</button>
       <strong class="month-label"></strong>
@@ -171,196 +177,160 @@ input::placeholder { color: var(--sub2); }
 </div>
 
 <div class="bottom-tab">
-  <button class="tab-btn active" onclick="switchTab('add', this)"><span class="tab-icon">✏️</span>기록</button>
+  <button class="tab-btn active" onclick="switchTab('today', this)"><span class="tab-icon">💰</span>오늘</button>
   <button class="tab-btn" onclick="switchTab('list', this)"><span class="tab-icon">📒</span>내역</button>
-  <button class="tab-btn" onclick="switchTab('stats', this)"><span class="tab-icon">📊</span>통계</button>
+  <button class="tab-btn" onclick="switchTab('insight', this)"><span class="tab-icon">🔍</span>분석</button>
   <a class="tab-btn" href="/index.html"><span class="tab-icon">📓</span>일기</a>
 </div>
 
 <div class="toast" id="toast"></div>
 
+<script src="/budget-core.js"></script>
 <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').catch(() => {});
 }
 
-const CATEGORIES = {
-  '지출': ['식비', '카페·간식', '교통', '쇼핑', '생활용품', '주거·통신', '의료·건강', '문화·여가', '교육', '경조사', '기타'],
-  '수입': ['급여', '부수입', '용돈', '금융수입', '기타']
-};
-const METHODS = ['카드', '현금', '계좌이체', '간편결제'];
+const { won, esc } = Budget;
 const days = ['일','월','화','수','목','금','토'];
-
-function localDate(d = new Date()) {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-const won = n => Number(n).toLocaleString('ko-KR') + '원';
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
 const now = new Date();
 document.getElementById('date-display').textContent =
   `${now.getFullYear()}년 ${now.getMonth()+1}월 ${now.getDate()}일 (${days[now.getDay()]})`;
-document.getElementById('tx-date').value = localDate();
 
-// ---------- 저장소 ----------
-const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
-const store = (k, v) => localStorage.setItem(k, JSON.stringify(v));
-let entries = load('budget_entries', []);
-let pendingDeletes = load('budget_pending_deletes', []);
-const persist = () => { store('budget_entries', entries); store('budget_pending_deletes', pendingDeletes); };
-
-// ---------- 입력 폼 ----------
-let selectedType = '지출', selectedCategory = '', selectedMethod = '카드';
-
-function renderChips() {
-  document.getElementById('category-chips').innerHTML = CATEGORIES[selectedType].map(c =>
-    `<button class="chip${c === selectedCategory ? ' selected' : ''}" onclick="selectCategory('${c}')">${c}</button>`).join('');
-  document.getElementById('method-chips').innerHTML = METHODS.map(m =>
-    `<button class="chip${m === selectedMethod ? ' selected' : ''}" onclick="selectMethod('${m}')">${m}</button>`).join('');
-  document.getElementById('method-card').style.display = selectedType === '지출' ? '' : 'none';
+// ---------- 오늘 쓸 수 있는 돈 ----------
+function renderHero() {
+  const s = Budget.budgetStatus();
+  const hero = document.getElementById('hero');
+  if (!s.budget) {
+    hero.innerHTML = `
+      <div class="label">오늘 쓴 돈</div>
+      <div class="big">${won(s.spentToday)}</div>
+      <div class="sub">한 달 예산을 정하면 오늘 쓸 수 있는 돈을 알려드려요</div>
+      <button onclick="openSettings()">예산 정하기</button>`;
+    return;
+  }
+  const over = s.todayLeft < 0;
+  const pct = Math.min(100, Math.round(s.spentMonth / s.budget * 100));
+  hero.innerHTML = `
+    <div class="label">${over ? '오늘 예산을 넘었어요' : '오늘 쓸 수 있는 돈'}</div>
+    <div class="big${over ? ' over' : ''}">${over ? '-' : ''}${won(Math.abs(s.todayLeft))}</div>
+    <div class="sub">오늘 ${won(s.spentToday)} 썼어요 · 하루 ${won(Math.max(0, s.daily))}씩</div>
+    <div class="progress${s.monthLeft < 0 ? ' over' : ''}"><div style="width:${pct}%"></div></div>
+    <div class="row"><span>이번 달 ${won(s.spentMonth)} / ${won(s.budget)}</span>
+      <span>${s.monthLeft >= 0 ? `${won(s.monthLeft)} 남음` : `${won(-s.monthLeft)} 초과`} · ${s.daysLeft}일 남음</span></div>`;
 }
-function selectType(btn) {
-  document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedType = btn.dataset.type;
-  selectedCategory = '';
-  renderChips();
+
+// ---------- 한 줄 입력 ----------
+let categoryOverride = '';
+
+function currentParse() {
+  const p = Budget.parse(document.getElementById('quick').value);
+  if (p && categoryOverride) p.category = categoryOverride;
+  return p;
 }
-function selectCategory(c) { selectedCategory = c; renderChips(); }
-function selectMethod(m) { selectedMethod = m; renderChips(); }
-function formatAmount(el) {
-  const n = el.value.replace(/[^0-9]/g, '');
-  el.value = n ? Number(n).toLocaleString('ko-KR') : '';
+
+function onQuickInput() {
+  const p = currentParse();
+  const box = document.getElementById('preview');
+  if (!p) { categoryOverride = ''; box.classList.remove('show'); return; }
+  if (categoryOverride && !Budget.CATEGORIES[p.type].includes(categoryOverride)) {
+    categoryOverride = '';
+    p.category = Budget.parse(document.getElementById('quick').value).category;
+  }
+  box.classList.add('show');
+  const d = new Date(p.date + 'T00:00:00');
+  document.getElementById('preview-line').innerHTML =
+    `<b class="${p.type === '수입' ? 'income' : 'expense'}">${p.type}</b> · ` +
+    (p.amount ? `<b>${won(p.amount)}</b>` : '<b>금액을 입력해 주세요</b>') +
+    ` · ${d.getMonth()+1}/${d.getDate()}${p.method ? ' · ' + p.method : ''}`;
+  document.getElementById('preview-chips').innerHTML = Budget.CATEGORIES[p.type].map(c =>
+    `<button class="chip${c === p.category ? ' selected' : ''}" onclick="pickCategory('${c}')">${c}</button>`).join('');
 }
-renderChips();
 
-async function addEntry() {
-  const amount = Number(document.getElementById('amount').value.replace(/[^0-9]/g, ''));
-  const date = document.getElementById('tx-date').value;
-  if (!amount) { showToast('금액을 입력해 주세요'); return; }
-  if (!selectedCategory) { showToast('카테고리를 골라 주세요'); return; }
-  if (!date) { showToast('날짜를 골라 주세요'); return; }
+function pickCategory(c) {
+  categoryOverride = c;
+  onQuickInput();
+  document.getElementById('quick').focus();
+}
 
-  const entry = {
-    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-    date, type: selectedType, category: selectedCategory, amount,
-    method: selectedType === '지출' ? selectedMethod : '',
-    memo: document.getElementById('memo').value.trim(),
-    synced: false
-  };
-  entries.push(entry);
-  persist();
+async function submitQuick() {
+  const p = currentParse();
+  if (!p) return;
+  if (!p.amount) { showToast('금액을 입력해 주세요'); return; }
+  document.getElementById('quick').value = '';
+  categoryOverride = '';
+  onQuickInput();
+  const result = await Budget.add(p);
+  showToast(`${p.category} ${won(p.amount)} ` + (
+    result === 'sheet' ? '✅ 시트에 저장' : result === 'pending' ? '· 전송 대기' : '✅ 저장'));
+}
 
-  document.getElementById('amount').value = '';
-  document.getElementById('memo').value = '';
-  selectedCategory = '';
-  renderChips();
+function txHtml(e) {
+  return `
+    <div class="tx">
+      <div class="info">
+        <div class="cat">${esc(e.category)} ${e.synced ? '' : '<span class="unsynced">전송 대기</span>'}</div>
+        <div class="meta">${esc([e.method, e.memo].filter(Boolean).join(' · '))}</div>
+      </div>
+      <div class="amt ${e.type === '수입' ? 'income' : 'expense'}">${e.type === '수입' ? '+' : '-'}${won(e.amount)}</div>
+      <button class="del" onclick="deleteEntry('${esc(e.id)}')">✕</button>
+    </div>`;
+}
 
-  if (!getUrl()) { showToast('✅ 기기에 저장했어요 (시트 미연동)'); return; }
-  const ok = await pushEntry(entry);
-  showToast(ok ? '✅ 구글 시트에 저장했어요!' : '✅ 기기에 저장했어요 (나중에 전송)');
+function renderToday() {
+  const list = Budget.byDate(Budget.localDate()).slice().reverse();
+  document.getElementById('today-list').innerHTML = list.length
+    ? `<div class="day-head"><span>오늘 기록</span></div>` + list.map(txHtml).join('')
+    : '';
+}
+
+async function deleteEntry(id) {
+  const e = Budget.entries.find(x => x.id === id);
+  if (e && confirm(`${e.category} ${won(e.amount)} 기록을 삭제할까요?`)) await Budget.remove(id);
+}
+
+// ---------- 설정 ----------
+function toggleSettings() { document.getElementById('settings-panel').classList.toggle('open'); }
+function openSettings() {
+  document.getElementById('settings-panel').classList.add('open');
+  document.getElementById('monthly-budget').focus();
+}
+function saveBudget(el) {
+  const n = Number(el.value.replace(/[^0-9]/g, ''));
+  el.value = n ? n.toLocaleString('ko-KR') : '';
+  Budget.settings.monthlyBudget = n;
+  renderHero();
+}
+function saveSettings() {
+  Budget.settings.url = document.getElementById('gas-url').value;
+  Budget.settings.token = document.getElementById('gas-token').value;
   updateSyncStatus();
 }
-
-// ---------- 구글 시트 통신 ----------
-function getUrl() { return (localStorage.getItem('budget_gas_url') || '').trim(); }
-function getToken() { return localStorage.getItem('budget_token') || ''; }
-
-// Content-Type을 text/plain으로 보내야 Apps Script에서 CORS 사전요청 없이 동작합니다.
-async function postToSheet(payload) {
-  const res = await fetch(getUrl(), {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ token: getToken(), ...payload })
-  });
-  const data = await res.json();
-  if (!data.ok) throw new Error(data.error);
-  return data;
+function updateSyncStatus() {
+  const el = document.getElementById('sync-status');
+  if (!Budget.settings.url) { el.textContent = '시트 미연동'; return; }
+  const waiting = Budget.waitingCount();
+  el.textContent = waiting ? `전송 대기 ${waiting}건` : '연동됨 ✅';
 }
-
-async function pushEntry(entry) {
+async function syncNow(manual) {
+  if (!Budget.settings.url) { if (manual) showToast('먼저 웹 앱 URL을 입력해 주세요'); return; }
   try {
-    const { synced, ...data } = entry;
-    await postToSheet({ action: 'add', entry: data });
-    entry.synced = true;
-    persist();
-    return true;
-  } catch (e) {
-    console.warn('시트 전송 실패', e);
-    return false;
-  }
-}
-
-async function syncAll(manual = false) {
-  if (!getUrl()) { if (manual) showToast('먼저 웹 앱 URL을 입력해 주세요'); return; }
-  try {
-    for (const id of [...pendingDeletes]) {
-      await postToSheet({ action: 'delete', id });
-      pendingDeletes = pendingDeletes.filter(x => x !== id);
-      persist();
-    }
-    for (const e of entries.filter(e => !e.synced)) {
-      await postToSheet({ action: 'add', entry: (({ synced, ...d }) => d)(e) });
-      e.synced = true;
-      persist();
-    }
-    const url = new URL(getUrl());
-    if (getToken()) url.searchParams.set('token', getToken());
-    const data = await (await fetch(url)).json();
-    if (!data.ok) throw new Error(data.error);
-    // 시트가 기준: 시트 내용 + 아직 전송 못 한 로컬 기록
-    const unsynced = entries.filter(e => !e.synced);
-    entries = [...data.rows.map(r => ({ ...r, synced: true })), ...unsynced];
-    persist();
-    localStorage.setItem('budget_last_sync', new Date().toISOString());
+    await Budget.sync();
     if (manual) showToast('🔄 동기화 완료!');
   } catch (e) {
     console.warn('동기화 실패', e);
     if (manual) showToast('⚠️ 동기화 실패: ' + e.message);
   }
   updateSyncStatus();
-  renderList();
-  renderStats();
 }
+const mb = Budget.settings.monthlyBudget;
+document.getElementById('monthly-budget').value = mb ? mb.toLocaleString('ko-KR') : '';
+document.getElementById('gas-url').value = Budget.settings.url;
+document.getElementById('gas-token').value = Budget.settings.token;
 
-async function deleteEntry(id) {
-  const entry = entries.find(e => e.id === id);
-  if (!entry || !confirm(`${entry.category} ${won(entry.amount)} 기록을 삭제할까요?`)) return;
-  entries = entries.filter(e => e.id !== id);
-  if (entry.synced) pendingDeletes.push(id);
-  persist();
-  renderList();
-  renderStats();
-  if (entry.synced && getUrl()) {
-    try {
-      await postToSheet({ action: 'delete', id });
-      pendingDeletes = pendingDeletes.filter(x => x !== id);
-      persist();
-    } catch (e) { console.warn('시트 삭제 실패', e); }
-  }
-  updateSyncStatus();
-}
-
-// ---------- 설정 ----------
-function saveSettings() {
-  localStorage.setItem('budget_gas_url', document.getElementById('gas-url').value.trim());
-  localStorage.setItem('budget_token', document.getElementById('gas-token').value);
-  updateSyncStatus();
-}
-function toggleSettings() { document.getElementById('settings-panel').classList.toggle('open'); }
-function updateSyncStatus() {
-  const el = document.getElementById('sync-status');
-  if (!getUrl()) { el.textContent = '미연동'; return; }
-  const waiting = entries.filter(e => !e.synced).length + pendingDeletes.length;
-  el.textContent = waiting ? `전송 대기 ${waiting}건` : '연동됨 ✅';
-}
-document.getElementById('gas-url').value = getUrl();
-document.getElementById('gas-token').value = getToken();
-
-// ---------- 내역 / 통계 ----------
+// ---------- 내역 / 분석 ----------
 let viewMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 const monthKey = () => `${viewMonth.getFullYear()}-${String(viewMonth.getMonth()+1).padStart(2,'0')}`;
-const monthEntries = () => entries.filter(e => e.date.startsWith(monthKey()));
 
 function moveMonth(diff) {
   viewMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() + diff, 1);
@@ -369,8 +339,8 @@ function moveMonth(diff) {
 }
 
 function summaryHtml(list) {
-  const inc = list.filter(e => e.type === '수입').reduce((s, e) => s + e.amount, 0);
-  const exp = list.filter(e => e.type === '지출').reduce((s, e) => s + e.amount, 0);
+  const inc = Budget.sum(list.filter(e => e.type === '수입'));
+  const exp = Budget.sum(Budget.expenses(list));
   return `
     <div class="box"><span>수입</span><b class="income">${won(inc)}</b></div>
     <div class="box"><span>지출</span><b class="expense">${won(exp)}</b></div>
@@ -380,7 +350,7 @@ function summaryHtml(list) {
 function renderList() {
   document.querySelectorAll('.month-label').forEach(el =>
     el.textContent = `${viewMonth.getFullYear()}년 ${viewMonth.getMonth()+1}월`);
-  const list = monthEntries();
+  const list = Budget.byMonth(monthKey());
   document.getElementById('list-summary').innerHTML = summaryHtml(list);
   const box = document.getElementById('tx-list');
   if (!list.length) {
@@ -391,35 +361,27 @@ function renderList() {
   list.forEach(e => (byDate[e.date] ||= []).push(e));
   box.innerHTML = Object.keys(byDate).sort().reverse().map(date => {
     const d = new Date(date + 'T00:00:00');
-    const exp = byDate[date].filter(e => e.type === '지출').reduce((s, e) => s + e.amount, 0);
+    const exp = Budget.sum(Budget.expenses(byDate[date]));
     return `<div class="day-group">
       <div class="day-head"><span>${d.getMonth()+1}월 ${d.getDate()}일 (${days[d.getDay()]})</span>${exp ? `<span>지출 ${won(exp)}</span>` : ''}</div>
-      ${byDate[date].map(e => `
-        <div class="tx">
-          <div class="info">
-            <div class="cat">${esc(e.category)} ${e.synced ? '' : '<span class="unsynced">전송 대기</span>'}</div>
-            <div class="meta">${esc([e.method, e.memo].filter(Boolean).join(' · '))}</div>
-          </div>
-          <div class="amt ${e.type === '수입' ? 'income' : 'expense'}">${e.type === '수입' ? '+' : '-'}${won(e.amount)}</div>
-          <button class="del" onclick="deleteEntry('${esc(e.id)}')">✕</button>
-        </div>`).join('')}
+      ${byDate[date].map(txHtml).join('')}
     </div>`;
   }).join('');
 }
 
 function renderStats() {
-  const list = monthEntries();
+  const list = Budget.byMonth(monthKey());
   document.getElementById('stats-summary').innerHTML = summaryHtml(list);
-  const exp = list.filter(e => e.type === '지출');
-  const total = exp.reduce((s, e) => s + e.amount, 0);
+  const exp = Budget.expenses(list);
+  const total = Budget.sum(exp);
   const box = document.getElementById('category-bars');
   if (!total) {
-    box.innerHTML = '<div class="empty-state" style="padding:30px 0;">이번 달 지출이 없어요</div>';
+    box.innerHTML = '<div class="empty-state" style="padding:24px 0;">이번 달 지출이 없어요</div>';
     return;
   }
   const byCat = {};
   exp.forEach(e => byCat[e.category] = (byCat[e.category] || 0) + e.amount);
-  box.innerHTML = '<div class="card-label"><div class="dot"></div>지출 비중</div>' +
+  box.innerHTML = '<div class="card-label"><div class="dot"></div>카테고리별 지출</div>' +
     Object.entries(byCat).sort((a, b) => b[1] - a[1]).map(([cat, amt]) => {
       const pct = Math.round(amt / total * 100);
       return `<div class="bar-row">
@@ -429,13 +391,43 @@ function renderStats() {
     }).join('');
 }
 
+const MIN_DIARY_DAYS = 5;
+function renderMood() {
+  const { dayCount, overall, moods } = Budget.moodAnalysis();
+  const box = document.getElementById('mood-card');
+  const label = '<div class="card-label"><div class="dot"></div>기분 × 소비</div>';
+  const valid = moods.filter(m => m.days >= 2);
+  if (dayCount < MIN_DIARY_DAYS || !overall || !valid.length) {
+    box.innerHTML = label + `<div class="empty-state" style="padding:16px 0;">
+      일기에 기분을 남긴 날이 ${MIN_DIARY_DAYS}일 이상 쌓이면<br>기분에 따라 소비가 어떻게 달라지는지 알려드려요<br>
+      <span style="font-size:12px;color:var(--sub2);">지금 ${dayCount}일</span></div>`;
+    return;
+  }
+  const top = valid[0];
+  const low = valid[valid.length - 1];
+  let insight = '';
+  if (top.ratio >= 1.2) {
+    insight = `${top.emoji} 기분이 <b>${esc(top.mood)}</b>인 날엔 평소보다 <b>${top.ratio.toFixed(1)}배</b> 써요` +
+      (top.topCategory ? ` (주로 ${esc(top.topCategory)})` : '');
+    if (low !== top && low.ratio < 0.8) insight += `<br>${low.emoji} <b>${esc(low.mood)}</b>인 날엔 가장 적게 써요`;
+  } else {
+    insight = '기분에 따라 소비가 크게 달라지지 않아요 👍';
+  }
+  const max = Math.max(...valid.map(m => m.avg));
+  box.innerHTML = label + `<div class="insight">${insight}</div>` +
+    valid.map(m => `<div class="bar-row">
+      <div class="top"><span>${m.emoji} ${esc(m.mood)} <span style="color:var(--sub2);font-size:11px;">${m.days}일</span></span>
+        <span>하루 평균 ${won(m.avg)}</span></div>
+      <div class="bar${m.ratio < 1 ? ' calm' : ''}"><div style="width:${max ? Math.round(m.avg / max * 100) : 0}%"></div></div>
+    </div>`).join('') +
+    `<p class="hint">일기를 쓴 ${dayCount}일 기준 · 전체 하루 평균 ${won(overall)}</p>`;
+}
+
 function switchTab(tab, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + tab).classList.add('active');
   btn.classList.add('active');
-  if (tab === 'list') renderList();
-  if (tab === 'stats') renderStats();
 }
 
 function showToast(msg) {
@@ -444,9 +436,25 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-renderList();
-updateSyncStatus();
-syncAll();
+function renderAll() {
+  renderHero();
+  renderToday();
+  renderList();
+  renderStats();
+  renderMood();
+  updateSyncStatus();
+}
+Budget.onChange(renderAll);
+renderAll();
+
+// 아이폰 단축어 등에서 budget.html?q=커피 4500 으로 열면 바로 기록
+const q = new URLSearchParams(location.search).get('q');
+if (q) {
+  history.replaceState(null, '', location.pathname);
+  document.getElementById('quick').value = q;
+  submitQuick();
+}
+syncNow(false);
 </script>
 </body>
 </html>
